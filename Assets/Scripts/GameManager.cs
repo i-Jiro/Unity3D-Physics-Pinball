@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
@@ -23,6 +24,7 @@ public class GameManager : MonoBehaviour
 
     void Update()
     {
+        //Checks if there is any pinballs in scene. Otherwise if none, spawn pinball.
         pinballsActive = FindObjectsOfType<Pinball>().Length;
         if(pinballsActive == 0 && lives > 0 && isGameActive)
         {
@@ -45,5 +47,10 @@ public class GameManager : MonoBehaviour
     {
         lives += livesToAdd;
         _livesText.SetText("Lives: " + lives);
+    }
+
+    public void Restart()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 }
